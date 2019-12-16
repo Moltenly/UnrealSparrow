@@ -27,6 +27,10 @@ AThirdPersonShooterCharacter::AThirdPersonShooterCharacter() {
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationYaw = false;
 	bUseControllerRotationRoll = false;
+
+	// Movement Values (all these values were reached with experimentation)
+	GetCharacterMovement()->MaxAcceleration = 1024.0f;
+	GetCharacterMovement()->BrakingDecelerationWalking = 256.0f;
 }
 
 void AThirdPersonShooterCharacter::BeginPlay() {
@@ -96,5 +100,9 @@ void AThirdPersonShooterCharacter::TurnAtRate(float Rate) {
 void AThirdPersonShooterCharacter::LookUpAtRate(float Rate) {
 	// TODO
 	// this will be used for controller input
+}
+
+float AThirdPersonShooterCharacter::GetLastFrameVelocityLength() const {
+	return GetCharacterMovement()->Velocity.Size();
 }
 

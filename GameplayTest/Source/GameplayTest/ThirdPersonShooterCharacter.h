@@ -31,6 +31,8 @@ public:
 	float LastFrameRightValue;
 	FORCEINLINE float GetLastFrameRightValue() const { return LastFrameRightValue; }
 
+	float GetLastFrameVelocityLength() const;
+
 protected:
 	virtual void BeginPlay() override;
 	void MoveCharacterWithAxis(EAxis::Type AxisType, float Value);

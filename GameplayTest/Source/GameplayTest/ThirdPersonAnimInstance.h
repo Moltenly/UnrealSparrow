@@ -15,10 +15,13 @@ public:
 	void UpdateAnimationProperties();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
-	float MovementSpeedX;
+	float MovementDirectionX;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
-	float MovementSpeedY;
+	float MovementDirectionY;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
+	float VelocityLength;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement")
 	class AThirdPersonShooterCharacter* pCharacter;

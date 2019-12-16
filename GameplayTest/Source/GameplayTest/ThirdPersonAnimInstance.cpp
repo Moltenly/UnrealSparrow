@@ -17,7 +17,8 @@ void UThirdPersonAnimInstance::UpdateAnimationProperties() {
 		return;
 	}
 
-	MovementSpeedX = pCharacter->GetLastFrameRightValue();
-	MovementSpeedY = pCharacter->GetLastFrameUpValue();
+	MovementDirectionX = pCharacter->GetLastFrameRightValue();
+	MovementDirectionY = pCharacter->GetLastFrameUpValue();
+	VelocityLength = pCharacter->GetLastFrameVelocityLength();
 }
 
