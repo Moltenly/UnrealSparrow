@@ -33,6 +33,18 @@ class GAMEPLAYTEST_API AThirdPersonShooterCharacter : public ACharacter {
 public:
 	AThirdPersonShooterCharacter();
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Player State")
+	EBowStatus CurrentBowStatus;
+	FORCEINLINE EBowStatus GetCurrentBowStatus() const { return CurrentBowStatus; }
+	void SetBowStatus(EBowStatus BowStatus);
+
+	// Movement States Values
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Movement States")
+	float BowDownPlayerVelocity = 600.0f;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Movement States")
+	float BowAimingPlayerVelocity = 450.0f;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera", meta = (AllowPrivateAccess = "true"))
 	class USpringArmComponent* pSpringArmComponent;
 	FORCEINLINE USpringArmComponent* GetSpringArmComponent() const { return pSpringArmComponent; }
@@ -47,6 +59,7 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
 	float BaseLookUpRate;
 
+	// Animation Related Values
 	float LastFrameUpValue;
 	FORCEINLINE float GetLastFrameUpValue() const { return LastFrameUpValue; }
 
@@ -58,6 +71,7 @@ public:
 protected:
 	virtual void BeginPlay() override;
 	void MoveCharacterWithAxis(EAxis::Type AxisType, float Value);
+	void ToggleDrawBowState();
 
 public:	
 	virtual void Tick(float DeltaTime) override;

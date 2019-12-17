@@ -64,6 +64,9 @@ void AThirdPersonShooterCharacter::SetupPlayerInputComponent(UInputComponent* Pl
 		PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 		
 		// TODO do this /\ for controllers (I don't have a controller to test it currently feels bad)
+
+		// Binding Draw Bow Action
+		PlayerInputComponent->BindAction("DrawBow", EInputEvent::IE_Pressed, this, &AThirdPersonShooterCharacter::ToggleDrawBowState);
 	}
 
 }
@@ -88,10 +91,16 @@ void AThirdPersonShooterCharacter::MoveCharacterWithAxis(EAxis::Type AxisType, f
 
 	FVector LastFrameMovementInput = GetLastMovementInputVector();
 
-	if (LastFrameMovementInput.X != 0 || LastFrameMovementInput.Y != 0) {
-		GetCharacterMovement()->bUseControllerDesiredRotation = true;
-	} else {
-		GetCharacterMovement()->bUseControllerDesiredRotation = false;
+	/*
+		This behavior allows the player to look around without rotating the character, but when the player moves, the character faces that direction
+		We only want this behavior on EBS_BowDown, because when we are aiming we want to always keep focused
+	*/
+	if (CurrentBowStatus == EBowStatus::EBS_BowDown) {
+		if (LastFrameMovementInput.X != 0 || LastFrameMovementInput.Y != 0) {
+			GetCharacterMovement()->bUseControllerDesiredRotation = true;
+		} else {
+			GetCharacterMovement()->bUseControllerDesiredRotation = false;
+		}
 	}
 }
 
@@ -110,3 +119,25 @@ float AThirdPersonShooterCharacter::GetLastFrameVelocityLength() const {
 	return GetCharacterMovement()->Velocity.Size();
 }
 
+/*
+	Set the Current Bow Status for the Player Character
+	- The only reason this function is not FORCEINLINE is that we might want to execute some behavior when going to some states
+*/
+void AThirdPersonShooterCharacter::SetBowStatus(EBowStatus BowStatus) {
+	CurrentBowStatus = BowStatus;
+}
+
+void AThirdPersonShooterCharacter::ToggleDrawBowState() {
+	if (CurrentBowStatus == EBowStatus::EBS_BowDown) {
+		GetCharacterMovement()->MaxWalkSpeed = BowAimingPlayerVelocity;
+		bUseControllerRotationYaw = true;
+		GetCharacterMovement()->bUseControllerDesiredRotation = false;
+		SetBowStatus(EBowStatus::EBS_BowAiming);
+	}
+	else if (CurrentBowStatus == EBowStatus::EBS_BowAiming) {
+		GetCharacterMovement()->MaxWalkSpeed = BowDownPlayerVelocity;
+		GetCharacterMovement()->bUseControllerDesiredRotation = true;
+		bUseControllerRotationYaw = false;
+		SetBowStatus(EBowStatus::EBS_BowDown);
+	}
+}
