@@ -20,5 +20,6 @@ void UThirdPersonAnimInstance::UpdateAnimationProperties() {
 	MovementDirectionX = pCharacter->GetLastFrameRightValue();
 	MovementDirectionY = pCharacter->GetLastFrameUpValue();
 	VelocityLength = pCharacter->GetLastFrameVelocityLength();
+	bIsInAir = pCharacter->GetCharacterMovement()->IsFalling();
 }
 

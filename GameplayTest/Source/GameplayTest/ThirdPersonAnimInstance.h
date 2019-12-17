@@ -23,6 +23,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
 	float VelocityLength;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
+	bool bIsInAir;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement")
 	class AThirdPersonShooterCharacter* pCharacter;
 

@@ -31,6 +31,10 @@ AThirdPersonShooterCharacter::AThirdPersonShooterCharacter() {
 	// Movement Values (all these values were reached with experimentation)
 	GetCharacterMovement()->MaxAcceleration = 1024.0f;
 	GetCharacterMovement()->BrakingDecelerationWalking = 256.0f;
+
+	// Jump Values (also experimentation)
+	GetCharacterMovement()->MaxJumpApexAttemptsPerSimulation = 4;
+	GetCharacterMovement()->JumpZVelocity = 500.0f;
 }
 
 void AThirdPersonShooterCharacter::BeginPlay() {

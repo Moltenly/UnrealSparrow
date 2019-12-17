@@ -4,6 +4,28 @@
 #include "GameFramework/Character.h"
 #include "ThirdPersonShooterCharacter.generated.h"
 
+
+/*
+	Bow State Enum
+		=> BOW DOWN
+			- High Velocity
+			- No possibility of aiming
+		=> AIMING
+			- Medium Velocity
+			- Can see the aim and prepare to shoot
+		=> SHOOTING
+			- Not possible not move
+			- Can actually shoot when in this state
+*/
+
+UENUM(BlueprintType)
+enum class EBowStatus : uint8 {
+	EBS_BowDown				UMETA(DisplayName = "BowDown"),
+	EBS_BowAiming			UMETA(DisplayName = "BowAiming"),
+	EBS_CommitedToShoot		UMETA(Display = "CommitedToShoot"),
+	EBS_MAX					UMETA(Display = "DefautMAX")
+};
+
 UCLASS()
 class GAMEPLAYTEST_API AThirdPersonShooterCharacter : public ACharacter {
 	GENERATED_BODY()
