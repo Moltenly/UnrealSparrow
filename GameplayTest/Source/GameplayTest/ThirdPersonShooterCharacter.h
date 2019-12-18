@@ -80,10 +80,18 @@ public:
 	UUserWidget* pHUDAimOverlay;
 	*/
 
+	/*
+		ANIMATION MONTAGES
+	*/
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Shooting Animation Montages")
+	class UAnimMontage* pPrimaryFireSlowMontage;
+
 protected:
 	virtual void BeginPlay() override;
 	void MoveCharacterWithAxis(EAxis::Type AxisType, float Value);
 	void ToggleDrawBowState();
+	void StartShooting();
 
 public:	
 	virtual void Tick(float DeltaTime) override;

@@ -1,4 +1,5 @@
 #include "ThirdPersonShooterCharacter.h"
+#include "Animation/AnimInstance.h"
 #include "Blueprint/UserWidget.h"
 #include "Camera/CameraComponent.h"
 #include "Components/InputComponent.h"
@@ -81,6 +82,9 @@ void AThirdPersonShooterCharacter::SetupPlayerInputComponent(UInputComponent* Pl
 
 		// Binding Draw Bow Action
 		PlayerInputComponent->BindAction("DrawBow", EInputEvent::IE_Pressed, this, &AThirdPersonShooterCharacter::ToggleDrawBowState);
+
+		// Shooting Bind Action
+		PlayerInputComponent->BindAction("Shoot", EInputEvent::IE_Pressed, this, &AThirdPersonShooterCharacter::StartShooting);
 	}
 
 }
@@ -153,5 +157,14 @@ void AThirdPersonShooterCharacter::ToggleDrawBowState() {
 		GetCharacterMovement()->bUseControllerDesiredRotation = true;
 		bUseControllerRotationYaw = false;
 		SetBowStatus(EBowStatus::EBS_BowDown);
+	}
+}
+
+void AThirdPersonShooterCharacter::StartShooting() {
+	UAnimInstance* pCharacterAnimInstance = GetMesh()->GetAnimInstance();
+
+	if (pCharacterAnimInstance != nullptr && pPrimaryFireSlowMontage != nullptr) {
+		pCharacterAnimInstance->Montage_Play(pPrimaryFireSlowMontage, 1.0f);
+		pCharacterAnimInstance->Montage_JumpToSection(FName("Default"), pPrimaryFireSlowMontage);
 	}
 }
