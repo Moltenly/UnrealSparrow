@@ -104,4 +104,7 @@ public:
 	// Arrow Shooting Handling
 	// Fast Shooting
 
+	UFUNCTION(BlueprintCallable)
+	void EndShooting();
+
 };

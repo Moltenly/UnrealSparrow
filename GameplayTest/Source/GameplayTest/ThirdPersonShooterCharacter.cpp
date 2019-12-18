@@ -164,7 +164,12 @@ void AThirdPersonShooterCharacter::StartShooting() {
 	UAnimInstance* pCharacterAnimInstance = GetMesh()->GetAnimInstance();
 
 	if (pCharacterAnimInstance != nullptr && pPrimaryFireSlowMontage != nullptr) {
-		pCharacterAnimInstance->Montage_Play(pPrimaryFireSlowMontage, 1.0f);
+		pCharacterAnimInstance->Montage_Play(pPrimaryFireSlowMontage, 2.0f);
 		pCharacterAnimInstance->Montage_JumpToSection(FName("Default"), pPrimaryFireSlowMontage);
+		DisableInput(GetWorld()->GetFirstPlayerController());
 	}
+}
+
+void AThirdPersonShooterCharacter::EndShooting() {
+	EnableInput(GetWorld()->GetFirstPlayerController());
 }
