@@ -60,9 +60,11 @@ public:
 	float BaseLookUpRate;
 
 	// Animation Related Values
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Animation Values")
 	float LastFrameUpValue;
 	FORCEINLINE float GetLastFrameUpValue() const { return LastFrameUpValue; }
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Animation Values")
 	float LastFrameRightValue;
 	FORCEINLINE float GetLastFrameRightValue() const { return LastFrameRightValue; }
 
