@@ -22,8 +22,9 @@ UENUM(BlueprintType)
 enum class EBowStatus : uint8 {
 	EBS_BowDown				UMETA(DisplayName = "BowDown"),
 	EBS_BowAiming			UMETA(DisplayName = "BowAiming"),
-	EBS_CommitedToShoot		UMETA(Display = "CommitedToShoot"),
-	EBS_MAX					UMETA(Display = "DefautMAX")
+	EBS_FastShot			UMETA(DisplayName = "FastShot"),
+	EBS_HeavyShot			UMETA(DisplayName = "HeavyShot"),
+	EBS_MAX					UMETA(DisplayName = "DefautMAX")
 };
 
 UCLASS()
@@ -91,5 +92,8 @@ public:
 	void MoveRight(float Value);
 	void TurnAtRate(float Rate);
 	void LookUpAtRate(float Rate);
+
+	// Arrow Shooting Handling
+	// Fast Shooting
 
 };
