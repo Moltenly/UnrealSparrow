@@ -1,4 +1,5 @@
 #include "ThirdPersonShooterCharacter.h"
+#include "Blueprint/UserWidget.h"
 #include "Camera/CameraComponent.h"
 #include "Components/InputComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -35,6 +36,19 @@ AThirdPersonShooterCharacter::AThirdPersonShooterCharacter() {
 	// Jump Values (also experimentation)
 	GetCharacterMovement()->MaxJumpApexAttemptsPerSimulation = 4;
 	GetCharacterMovement()->JumpZVelocity = 500.0f;
+
+	// Handling User Interface Stuff...
+	/*
+	if (HUDAimOverlay) {
+		pHUDAimOverlay = CreateWidget<UUserWidget>(this, HUDAimOverlay);
+
+		if (pHUDAimOverlay) {
+			pHUDAimOverlay->AddToViewport();
+			// Initially it is hidden, because it is not shown on "BowDown" State
+			pHUDAimOverlay->SetVisibility(ESlateVisibility::Hidden);
+		}
+	}
+	*/
 }
 
 void AThirdPersonShooterCharacter::BeginPlay() {

@@ -70,6 +70,15 @@ public:
 
 	float GetLastFrameVelocityLength() const;
 
+	// USER INTERFACE
+	/*
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player HUD")
+	TSubclassOf<class UUserWidget> HUDAimOverlay;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player HUD")
+	UUserWidget* pHUDAimOverlay;
+	*/
+
 protected:
 	virtual void BeginPlay() override;
 	void MoveCharacterWithAxis(EAxis::Type AxisType, float Value);
