@@ -69,8 +69,6 @@ public:
 	float LastFrameRightValue;
 	FORCEINLINE float GetLastFrameRightValue() const { return LastFrameRightValue; }
 
-	float GetLastFrameVelocityLength() const;
-
 	// USER INTERFACE
 	/*
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player HUD")

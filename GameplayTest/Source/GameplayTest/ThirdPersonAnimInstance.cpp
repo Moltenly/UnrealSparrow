@@ -19,7 +19,10 @@ void UThirdPersonAnimInstance::UpdateAnimationProperties() {
 
 	MovementDirectionX = pCharacter->GetLastFrameRightValue();
 	MovementDirectionY = pCharacter->GetLastFrameUpValue();
-	VelocityLength = pCharacter->GetLastFrameVelocityLength();
+
+	const FVector CharacterVelocity = pCharacter->GetVelocity();
+	const FVector LateralVelocity = FVector(CharacterVelocity.X, CharacterVelocity.Y, 0.0f);
+	VelocityLength = LateralVelocity.Size();
 	bIsInAir = pCharacter->GetCharacterMovement()->IsFalling();
 }
 
